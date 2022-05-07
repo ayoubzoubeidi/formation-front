@@ -1,0 +1,61 @@
+<div class="main-content">
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="ml-auto p-2">
+        <button type="button" class="btn btn-danger rounded-circle" [routerLink]="'/add-session'">
+            <span class="material-icons">
+                add_circle
+                </span>
+        </button>
+    </div>
+    <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
+            <mat-cell *matCellDef="let formation">{{formation.id}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="titre">
+            <mat-header-cell *matHeaderCellDef>Titre Formation</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let session">{{session?.formation}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="formateur">
+            <mat-header-cell *matHeaderCellDef>Formateur</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let session">{{session?.formateur?.nom}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dateDebut">
+            <mat-header-cell *matHeaderCellDef>Date Debut</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let session">{{session?.dateDebut}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dateFin">
+            <mat-header-cell *matHeaderCellDef>Date Fin</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let session">{{session?.dateFin}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="partiicpants">
+            <mat-header-cell *matHeaderCellDef>Liste Participants</mat-header-cell>
+            <mat-cell *matCellDef="let session"
+                      class="description-cell">
+                      <a [routerLink]="['/sessions',session.id,'participation']">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">settings</mat-icon>
+            </a>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+            <mat-cell *matCellDef="let session"
+                      class="description-cell">
+                <button (click)="deleteSession(session.id)">delete</button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+</div>

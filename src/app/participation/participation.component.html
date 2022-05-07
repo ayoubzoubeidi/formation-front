@@ -1,0 +1,81 @@
+<div class="main-content">
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="ml-auto p-2">
+        <button type="button" class="btn btn-danger rounded-circle" [routerLink]="'/add-participant'">
+            <span class="material-icons">
+                add_circle
+                </span>
+        </button>
+    </div>
+    <h5> Liste des participants: </h5>
+    <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+        <ng-container matColumnDef="nom">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+            <mat-cell *matCellDef="let participant">{{participant?.nom}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="prenom">
+            <mat-header-cell *matHeaderCellDef>Prenom</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let participant">{{participant?.prenom}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let participant">{{participant?.email}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tel">
+            <mat-header-cell *matHeaderCellDef>Telephone</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let participant">{{participant?.tel}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="option">
+            <mat-header-cell *matHeaderCellDef>Annuler La Participation</mat-header-cell>
+            <mat-cell *matCellDef="let participant" class="description-cell">
+                <a (click)="unsubscribeParticipation(participant.id)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">settings</mat-icon>
+                </a>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+
+
+    <h5> Liste des non participants: </h5>
+
+    <mat-table class="lessons-table mat-elevation-z8" [dataSource]="notParticipantsDataSource">
+        <ng-container matColumnDef="nom">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+            <mat-cell *matCellDef="let participant">{{participant?.nom}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="prenom">
+            <mat-header-cell *matHeaderCellDef>Prenom</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let participant">{{participant?.prenom}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let participant">{{participant?.email}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tel">
+            <mat-header-cell *matHeaderCellDef>Telephone</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let participant">{{participant?.tel}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="option">
+            <mat-header-cell *matHeaderCellDef>Ajouter La Participation</mat-header-cell>
+            <mat-cell *matCellDef="let participant" class="description-cell">
+                <a (click)="subscribeParticipation(participant.id)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">settings</mat-icon>
+                </a>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+</div>

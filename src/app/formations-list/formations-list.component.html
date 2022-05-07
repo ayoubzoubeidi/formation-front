@@ -1,0 +1,42 @@
+<div class="main-content">
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+    <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
+            <mat-cell *matCellDef="let formation">{{formation.id}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="titre">
+            <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let formation">{{formation.titre}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="domaine">
+            <mat-header-cell *matHeaderCellDef>domaine</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let formation">{{formation?.domaine}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="sessions">
+            <mat-header-cell *matHeaderCellDef>sessions</mat-header-cell>
+            <mat-cell *matCellDef="let formation"
+                      class="description-cell">
+                      <a [routerLink]="['../formations',formation.id,'sessions']">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">settings</mat-icon>
+            </a>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+            <mat-cell *matCellDef="let formation"
+                      class="description-cell">
+                <button (click)="deleteFormation(formation.id)">delete</button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+</div>

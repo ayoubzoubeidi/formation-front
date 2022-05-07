@@ -1,0 +1,36 @@
+<p-toast></p-toast>
+
+<div class="main-content  bg-white">
+    <div class="container">
+        <div class="card shadow mb-4 text-center">
+            <h5 class="card-title">Ajouter Session</h5>
+            <div class="card-body">
+                <form [formGroup]="participantForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="birthDate">Date Naissance: </label>
+                            <p-calendar class="form-control" formControlName="birthDate" id="birthDate"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" formControlName="nom" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="prenom">prenom</label>
+                        <input type="text" id="prenom" formControlName="prenom" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="email">email</label>
+                        <input type="text" id="email" formControlName="email" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="tel">tel</label>
+                        <input type="number" id="tel" formControlName="tel" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

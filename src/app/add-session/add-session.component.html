@@ -1,0 +1,54 @@
+<p-toast></p-toast>
+
+<div class="main-content  bg-white">
+    <div class="container">
+        <div class="card shadow mb-4 text-center">
+            <h5 class="card-title">Ajouter Session</h5>
+            <div class="card-body">
+                <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="datedebut">Date Début: </label>
+                            <p-calendar class="form-control" formControlName="dateDebut" id="datedebut"></p-calendar>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="datefin">Date Fin</label>
+                            <p-calendar class="form-control" formControlName="dateFin" id="datefin"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="formation">Formation</label>
+                        <input type="text" id="formation" formControlName="formation" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="formateur">Formateur</label>
+                        <select class="custom-select" formControlName="formateur">
+                            <option selected>Open this select menu</option>
+                            <option *ngFor="let forma of formateurs; let i = index" [ngValue]="forma">
+                                {{forma.nom}} {{formateurs[i].prenom}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label for="participants">Participants</label>
+                        <p-pickList [source]="source" [target]="target" sourceHeader="Available" targetHeader="Selected"
+                            dragdrop="true" [responsive]="true" [sourceStyle]="{'height':'300px'}"
+                            [targetStyle]="{'height':'300px'}" filterBy="prenom"
+                            sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name"
+                            (onMoveToTarget)="showTarget()">
+                            <ng-template let-participant pTemplate="item">
+                                <div>
+                                    <div>
+                                        <h5 class="p-mb-2">{{participant.nom}} {{participant.prenom}}</h5>
+                                        <h5 class="p-mb-2">{{participant.email}} {{participant.tel}}</h5>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-pickList>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
