@@ -36,9 +36,7 @@ export class AddParticipantComponent implements OnInit {
     console.log(this.participantForm.valid);
     if (this.participantForm.valid) {
       let data = this.participantForm.value;
-      console.log(data);
       this.particiapantService.addParticipant(data).subscribe(res=>{
-        console.log(res);
         this.showSuccess();
         setTimeout(() => {
           this.router.navigateByUrl('/sessions-list');
@@ -47,7 +45,6 @@ export class AddParticipantComponent implements OnInit {
       
     } else {
       this.showError();
-      console.log('here');
     }
 
   }

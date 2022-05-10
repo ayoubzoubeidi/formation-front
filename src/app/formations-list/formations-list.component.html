@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="main-content">
     <div class="spinner-container" *ngIf="dataSource.loading$ | async">
         <mat-spinner></mat-spinner>
@@ -29,13 +30,16 @@
         </ng-container>
 
         <ng-container matColumnDef="delete">
-            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-            <mat-cell *matCellDef="let formation"
-                      class="description-cell">
-                <button (click)="deleteFormation(formation.id)">delete</button>
+            <mat-header-cell *matHeaderCellDef>delete</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let formation">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons"><a (click)="deleteFormation(formation?.id)">delete</a></i>
+                    </div>
+                </div>
             </mat-cell>
         </ng-container>
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
