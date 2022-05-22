@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {SignupRequest} from '../model/signup-request.model';
 
 export class User {
     constructor(
@@ -37,9 +38,13 @@ export class AuthenticationService {
         );
     }
 
+    createAccount(username, password) {
+        const signupRequest = new SignupRequest(username, password)
+        return this.httpClient.post('http://localhost:8080/sign-up', signupRequest)
+    }
 
     isUserLoggedIn() {
-        let token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         return !(token === null);
     }
 
